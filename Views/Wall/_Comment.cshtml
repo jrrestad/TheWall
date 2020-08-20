@@ -1,0 +1,10 @@
+@model Comment
+
+@* I don't use this in the project *@
+<div class="container">
+    <form asp-controller="Wall" asp-action="CreateComment" method="post">
+        <h3>Post a Comment</h3>
+        <input asp-for="Body" class="form-control">
+        <button class="btn btn-primary btn-sm">Post a comment</button>
+    </form>
+    <div>

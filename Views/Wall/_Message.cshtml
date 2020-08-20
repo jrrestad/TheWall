@@ -1,0 +1,9 @@
+@model Message
+
+<div class="container">
+    <form asp-controller="Wall" asp-action="CreateMsg" method="post">
+        <h2>Post a Message</h2>
+        <input asp-for="Body" class="form-control">
+        <button class="btn btn-primary">Post a message</button>
+    </form>
+<div>

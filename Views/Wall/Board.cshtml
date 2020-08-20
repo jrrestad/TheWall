@@ -1,0 +1,48 @@
+@model Comment
+
+@{
+int? uid = @Context.Session.GetInt32("UserId");
+}
+<div class="container pt-5">
+    <div class="col-md">
+        <partial name="_Message"></partial>
+    </div>
+    @foreach (var msg in ViewBag.AllMsg)
+    {
+        <div class="d-flex justify-content-between">
+            <h5>@msg.Poster.FirstName @msg.Poster.LastName - <small class="text-muted">@msg.CreatedAt</small></h5>
+            @if (msg.Poster.UserId == uid)
+            {
+            <form method="post" asp-controller="Wall" asp-action="DeleteMsg" asp-route-MessageId="@msg.MessageId">
+                <button class="btn btn-link">Delete Message</button>
+            </form>
+            }
+        </div>
+    <ul>
+    <p>@msg.Body</p>
+        @foreach (var comm in ViewBag.AllComm)
+        {
+            @if (comm.MessageId == msg.MessageId)
+            {
+            <div class="d-flex justify-content-between">
+                <h6>@comm.User.FirstName @comm.User.LastName - <small class="text-muted">@comm.CreatedAt</small></h6>
+                @if (comm.User.UserId == uid)
+                {
+                <form method="post" asp-controller="Wall" asp-action="DeleteComment" asp-route-CommentId="@comm.CommentId">
+                    <button class="btn btn-link">Delete Comment</button>
+                </form>
+                }
+            </div>
+            <ul>
+            <p>@comm.Body</p>
+            </ul>
+            }
+        }
+    <form asp-controller="Wall" asp-action="CreateComment" asp-route-MessageId="@msg.MessageId" method="post">
+        <h3>Post a Comment</h3>
+        <input asp-for="Body" class="form-control">
+        <button class="btn btn-primary btn-sm">Post a comment</button>
+    </form>
+    </ul>
+    }
+</div>

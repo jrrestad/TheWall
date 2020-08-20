@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model LogUser
+
+<div class="container p-5">
+    <form asp-controller="Home" asp-action="Login" method="post">
+    <h1 class="text-center">Please Login</h1>
+    <div class="col-md-5  bg-light border mx-auto rounded shadow p-5">
+
+        <div class="form-group">
+            @* <label asp-for="Email"></label> *@
+            <span class="text-danger" asp-validation-for="LogEmail"></span>
+            <input class="form-control" asp-for="LogEmail" placeholder="Email Address">
+        </div>
+
+        <div class="form-group">
+            @* <label asp-for="Password"></label> *@
+            <span class="text-danger" asp-validation-for="LogPassword"></span>
+            <input class="form-control" asp-for="LogPassword" placeholder="Password">
+        </div>
+
+        <button class="btn btn-primary btn-lg form-control">Login</button>
+        <div class="d-flex justify-content-center mt-3 mb-0">
+        <a class="mx-auto text-center" href="/">Sign up</a>
+        </div>
+    </div>
+    </form>
+    @* <div class="d-flex justify-content-center mt-3 mb-0">
+        &copy;2020 - Login and Registration 
+    </div> *@
+</div>
